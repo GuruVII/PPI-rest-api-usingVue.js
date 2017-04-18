@@ -7,7 +7,7 @@ webpackJsonp([0],{
 
 
 Object.defineProperty(exports, "__esModule", {
-		value: true
+	value: true
 });
 
 var _vue = __webpack_require__(1);
@@ -16,8 +16,9 @@ var _vue2 = _interopRequireDefault(_vue);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-exports.default = _vue2.default.component('picture-list', {
-		template: "\n\t\t<div class=\"row\">\n\t\t\t<div class=\"col l3 m6 s12 placement-class\" v-for=\"items in masterArray\">\n\t\t\t\t<div class=\"col s12 m7\">\n\t\t          <div class=\"card\">\n\t\t            <div class=\"card-image\">\n\t\t              <img src=\"images/sample-1.jpg\">\n\t\t              <span class=\"card-title\">Card Title</span>\n\t\t            </div>\n\t\t            <div class=\"card-content\">\n\t\t              <span>{{items.post_likes}}</span> people \n\t\t            </div>\n\t\t            <div class=\"card-action\">\n\t\t              <a href=\"#\">This is a link</a>\n\t\t            </div>\n\t\t          </div>\n\t          </div>\n          </div>\n        </div>\n          "
+exports.default = _vue2.default.component('pictureList', {
+	props: ['masterArray'],
+	template: '\n\t\t<div class="row">\n\t\t\t<div class="col l3 m6 s12 placement-class" v-for="items in masterArray">\n\t\t\t\t<div class="col s12 m7">\n\t\t          <div class="card">\n\t\t            <div class="card-image">\n\t\t              <img src="images/sample-1.jpg">\n\t\t              <span class="card-title">{{items.code}}</span>\n\t\t            </div>\n\t\t            <div class="card-content">\n\t\t              <span>{{items.post_likes}}</span> people \n\t\t            </div>\n\t\t            <div class="card-action">\n\t\t              <a href="#">This is a link</a>\n\t\t            </div>\n\t\t          </div>\n\t          </div>\n          </div>\n        </div>\n          '
 });
 
 /***/ }),
@@ -52,9 +53,9 @@ var getData = {
 					offset: 0
 				}
 			}).then(function (response) {
-				var _data;
+				var _masterArray;
 
-				(_data = _this.data).push.apply(_data, _toConsumableArray(response.data));
+				(_masterArray = _this.masterArray).push.apply(_masterArray, _toConsumableArray(response.data));
 				console.log(_this.masterArray);
 			}).catch(function (error) {
 				console.log(error);
@@ -93,6 +94,10 @@ var vue1 = new _vue2.default({
 	mixins: [_getData.getData],
 	mounted: function mounted() {
 		this.getData();
+	},
+
+	components: {
+		pictureList: _pictureComponent2.default
 	}
 });
 

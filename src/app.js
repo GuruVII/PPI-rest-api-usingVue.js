@@ -1,7 +1,6 @@
 import Vue from "vue";
 import {getData} from "./mixins/getData";
-import myDefaults from "./components/pictureComponent";
-
+import pictureList from "./components/pictureComponent";
 
 
 	var vue1 = new Vue ({
@@ -12,6 +11,9 @@ import myDefaults from "./components/pictureComponent";
 		mixins: [getData],
 		mounted() {
 			this.getData();
+		},
+		components: {
+			pictureList
 		}
 	})
 
