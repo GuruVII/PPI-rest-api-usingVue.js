@@ -2,11 +2,11 @@
 import axios from "axios";
 const getData = {
 	methods: {
-		getData: function(){
+		getData: function(offset){
 			axios.get('http://api.piratetimes.net/api/v1/social/?_format=json', {
 				params: {
 					sub_type: 'I',
-					offset: 0
+					offset: offset
 				}
 				})
 				.then(response => {

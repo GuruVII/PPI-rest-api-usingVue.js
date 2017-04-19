@@ -9,7 +9,7 @@
 <body>
 	<div id="root">
 		<div class="container">
-			<picture-list :master-array="masterArray"></picture-list>
+			<picture-list :master-array="masterArray" v-on:scroll="infiniteScroll"></picture-list>
 		</div>
 	</div>
 </body>
