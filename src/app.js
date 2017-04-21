@@ -1,4 +1,6 @@
 import Vue from "vue";
+import _ from 'lodash';
+import throttle from 'lodash.throttle';
 import {getData} from "./mixins/getData";
 import pictureList from "./components/pictureComponent";
 import {infiniteScroll} from "./mixins/infiniteScroll";
@@ -12,10 +14,10 @@ import {infiniteScroll} from "./mixins/infiniteScroll";
         },
         methods: {
             scrolling: function(){
-                window.addEventListener("scroll", () => {
-                this.infiniteScroll();
-                });
+                window.addEventListener('scroll', () => {this.infiniteScroll()});
             }
+            
+
         },
         mixins: [getData, infiniteScroll],
         mounted() {
@@ -27,4 +29,3 @@ import {infiniteScroll} from "./mixins/infiniteScroll";
             pictureList
         }
     })
-

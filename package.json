@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
-    "babel-cli": "^6.24.0",
     "axios": "^0.15.3",
-    "jquery": "^3.2.1",
+    "babel-cli": "^6.24.0",
+    "lodash.throttle": "^4.1.1",
     "materialize-css": "^0.98.1",
     "vue": "^2.2.6"
   },

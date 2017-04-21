@@ -7,7 +7,6 @@ export default Vue.component('pictureList', {
 				<div class="col s12 m7">
 		          <div class="card">
 		            <div class="card-image">
-		              <img src="images/sample-1.jpg">
 		              <span class="card-title">{{items.code}}</span>
 		            </div>
 		            <div class="card-content">
