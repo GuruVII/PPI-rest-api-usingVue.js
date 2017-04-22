@@ -9,12 +9,16 @@ import {infiniteScroll} from "./mixins/infiniteScroll";
     var vue1 = new Vue ({
         el: "#root",
         data: {
-            offset:0,
-            masterArray: []
+            infiniteScrollCurrentOffset:0,
+            infiniteScrollOffset: 100,
+            infiniteScrollPage: 0,
+            infiniteScrollPerPage: 20, //how many items are loaded per page
+            masterArray: [], //holds all the entires that are visible
+            tempArray: [] //holds all the entries of a single GET.
         },
         methods: {
             scrolling: function(){
-                window.addEventListener('scroll', () => {this.infiniteScroll()});
+                window.addEventListener('scroll', () => {this.infiniteScroll(this.infiniteScrollPerPage)});
             }
             
 

@@ -10,7 +10,7 @@ const getData = {
 				}
 				})
 				.then(response => {
-					this.masterArray.push(...response.data)
+					this.tempArray.push(...response.data)
 					console.log(this.masterArray);
 				})
 				.catch(function (error) {
