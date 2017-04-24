@@ -56,7 +56,7 @@ var getData = {
 				var _tempArray;
 
 				(_tempArray = _this.tempArray).push.apply(_tempArray, _toConsumableArray(response.data));
-				console.log(_this.masterArray);
+				_this.infiniteScroll(_this.infiniteScrollPerPage);
 			}).catch(function (error) {
 				console.log(error);
 			});
@@ -98,11 +98,14 @@ var infiniteScroll = {
 			console.log('Body top: ' + scrollTop);
 			console.log('offset height: ' + document.body.offsetHeight);
 
-			if (window.innerHeight + scrollTop > document.body.offsetHeight - 200) {
-
-				for (var i = this.infiniteScrollPage * this.infiniteScrollPerPage; i < i + this.infiniteScrollPerPage; i++) {
-					this.masterArray.push(this.tempArray[i]);
-				}
+			if (window.innerHeight + scrollTop > document.body.offsetHeight - 200 || this.infiniteScrollCurrentOffset == 0) {
+				var i = 0;
+				var entry = void 0;
+				do {
+					i++;
+					entry = this.infiniteScrollPage * this.infiniteScrollPerPage + i;
+					this.masterArray.push(this.tempArray[entry]);
+				} while (i < this.infiniteScrollPerPage);
 
 				if (this.infiniteScrollPage * this.infiniteScrollPerPage % this.infiniteScrollOffset == 0) {
 					// increase the currentoffset and reset the page and temporaryArray
@@ -173,7 +176,6 @@ var vue1 = new _vue2.default({
     mixins: [_getData.getData, _infiniteScroll.infiniteScroll],
     mounted: function mounted() {
         this.getData(this.offset);
-
         this.scrolling();
     },
 

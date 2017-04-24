@@ -26,7 +26,6 @@ import {infiniteScroll} from "./mixins/infiniteScroll";
         mixins: [getData, infiniteScroll],
         mounted() {
             this.getData(this.offset);
-            
             this.scrolling();
         },
         components: {

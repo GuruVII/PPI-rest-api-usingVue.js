@@ -9,12 +9,17 @@ const infiniteScroll = {
 			console.log(`windows height: ${window.innerHeight}`);
 			console.log(`Body top: ${scrollTop}`);
 			console.log(`offset height: ${document.body.offsetHeight}`);
-
-			if ((window.innerHeight + scrollTop) > (document.body.offsetHeight - 200)){
-				
-				for(var i = this.infiniteScrollPage * this.infiniteScrollPerPage; i < (i + this.infiniteScrollPerPage); i++ ){
-					this.masterArray.push(this.tempArray[i])
+			//if the screen is 200px from the edge or if the page jsut started (thus offset is 0), do the code
+			if ((window.innerHeight + scrollTop) > (document.body.offsetHeight - 200) || (this.infiniteScrollCurrentOffset == 0)){
+				let i = 0;
+				let entry;	
+				do {
+					i++
+					entry = this.infiniteScrollPage * this.infiniteScrollPerPage + i
+					this.masterArray.push(this.tempArray[entry])
 				}
+				while (i < this.infiniteScrollPerPage)
+				
 
 				if (((this.infiniteScrollPage * this.infiniteScrollPerPage) % this.infiniteScrollOffset) == 0 ){
 					// increase the currentoffset and reset the page and temporaryArray

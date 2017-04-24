@@ -11,7 +11,7 @@ const getData = {
 				})
 				.then(response => {
 					this.tempArray.push(...response.data)
-					console.log(this.masterArray);
+					this.infiniteScroll(this.infiniteScrollPerPage);
 				})
 				.catch(function (error) {
 					console.log(error);
