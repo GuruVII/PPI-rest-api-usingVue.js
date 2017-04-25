@@ -10,7 +10,7 @@ const infiniteScroll = {
 			if ((window.innerHeight + scrollTop) > (document.body.offsetHeight - 200)){
 				let i = 0;
 				let entry;
-				console.log("it goes in here")
+				//this loops pushes data from the tempArray to the masterArray, while accounting for how far we've gone though the tempArray
 				do {	
 					entry = this.infiniteScrollPage * this.infiniteScrollPerPage + i
 					i++
@@ -18,10 +18,9 @@ const infiniteScroll = {
 					this.masterArray.push(this.tempArray[entry])
 				}
 				while (i < this.infiniteScrollPerPage)
-				
-				if ((((this.infiniteScrollPage + 1) * this.infiniteScrollPerPage) % this.infiniteScrollOffset) == 0 ){
 
-					console.log("It is now there")
+				//checks if the entire tempArray has be traversed, if so gets new data for the temp array
+				if ((((this.infiniteScrollPage + 1) * this.infiniteScrollPerPage) % this.infiniteScrollOffset) == 0 ){
 					// increase the currentoffset and reset the page and temporaryArray
 					this.infiniteScrollCurrentOffset += this.infiniteScrollOffset;
 					this.infiniteScrollPage = 0;

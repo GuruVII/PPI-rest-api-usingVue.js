@@ -13,7 +13,7 @@ import {infiniteScroll} from "./mixins/infiniteScroll";
             infiniteScrollOffset: 100,
             infiniteScrollPage: 0,
             infiniteScrollPerPage: 20, //how many items are loaded per page
-            masterArray: [], //holds all the entires that are visible
+            masterArray: [], //holds all the entires that are visible.
             tempArray: [] //holds all the entries of a single GET.
         },
         methods: {
@@ -25,7 +25,7 @@ import {infiniteScroll} from "./mixins/infiniteScroll";
         },
         mixins: [getData, infiniteScroll],
         mounted() {
-            this.getData(this.offset);
+            this.getData(this.infiniteScrollCurrent);
             this.scrolling();
         },
         components: {
