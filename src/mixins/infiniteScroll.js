@@ -15,7 +15,14 @@ const infiniteScroll = {
 					entry = this.infiniteScrollPage * this.infiniteScrollPerPage + i
 					i++
 					//console.log(entry)
-					this.masterArray.push(this.tempArray[entry])
+					if (this.tempArray[entry] != undefined){
+						this.masterArray.push(this.tempArray[entry])
+					}
+					else {
+						window.removeEventListener('scroll', () => {this.infiniteScroll(this.infiniteScrollPerPage)})
+						return
+					};
+
 				}
 				while (i < this.infiniteScrollPerPage)
 

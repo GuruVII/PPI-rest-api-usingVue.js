@@ -93,23 +93,31 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var infiniteScroll = {
 	methods: { //_.throttle is from lodash and it throttles the eventlisteners from firing on every scroll event
 		infiniteScroll: _lodash2.default.throttle(function () {
+			var _this = this;
+
 			//determines how far away you are from the top of the screen. It is written this way becuase none work in every browser.
 			var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
 			//if the screen is 200px from the edge or if the page jsut started (thus offset is 0), do the code
 			if (window.innerHeight + scrollTop > document.body.offsetHeight - 200) {
 				var i = 0;
 				var entry = void 0;
-				console.log("it goes in here");
+				//this loops pushes data from the tempArray to the masterArray, while accounting for how far we've gone though the tempArray
 				do {
 					entry = this.infiniteScrollPage * this.infiniteScrollPerPage + i;
 					i++;
 					//console.log(entry)
-					this.masterArray.push(this.tempArray[entry]);
+					if (this.tempArray[entry] != undefined) {
+						this.masterArray.push(this.tempArray[entry]);
+					} else {
+						window.removeEventListener('scroll', function () {
+							_this.infiniteScroll(_this.infiniteScrollPerPage);
+						});
+						return;
+					};
 				} while (i < this.infiniteScrollPerPage);
 
+				//checks if the entire tempArray has be traversed, if so gets new data for the temp array
 				if ((this.infiniteScrollPage + 1) * this.infiniteScrollPerPage % this.infiniteScrollOffset == 0) {
-
-					console.log("It is now there");
 					// increase the currentoffset and reset the page and temporaryArray
 					this.infiniteScrollCurrentOffset += this.infiniteScrollOffset;
 					this.infiniteScrollPage = 0;
@@ -163,7 +171,7 @@ var vue1 = new _vue2.default({
         infiniteScrollOffset: 100,
         infiniteScrollPage: 0,
         infiniteScrollPerPage: 20, //how many items are loaded per page
-        masterArray: [], //holds all the entires that are visible
+        masterArray: [], //holds all the entires that are visible.
         tempArray: [] //holds all the entries of a single GET.
     },
     methods: {
@@ -178,7 +186,7 @@ var vue1 = new _vue2.default({
     },
     mixins: [_getData.getData, _infiniteScroll.infiniteScroll],
     mounted: function mounted() {
-        this.getData(this.offset);
+        this.getData(this.infiniteScrollCurrent);
         this.scrolling();
     },
 
