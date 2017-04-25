@@ -10,8 +10,9 @@ const getData = {
 				}
 				})
 				.then(response => {
+					console.log("pushing data");
 					this.tempArray.push(...response.data)
-					this.infiniteScroll(this.infiniteScrollPerPage);
+					this.infiniteScroll();
 				})
 				.catch(function (error) {
 					console.log(error);

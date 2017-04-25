@@ -10,7 +10,7 @@ export default Vue.component('pictureList', {
 		              <span class="card-title">{{items.code}}</span>
 		            </div>
 		            <div class="card-content">
-		              <span>{{items.post_likes}}</span> people 
+		              <span>{{items.post_id}}</span>
 		            </div>
 		            <div class="card-action">
 		              <a href="#">This is a link</a>

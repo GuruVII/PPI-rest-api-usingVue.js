@@ -18,7 +18,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 exports.default = _vue2.default.component('pictureList', {
 	props: ['masterArray'], //the data for the prop is acquired though the DOM
-	template: '\n\t\t<div class="row">\n\t\t\t<div class="col l3 m6 s12 placement-class" v-for="items in masterArray">\n\t\t\t\t<div class="col s12 m7">\n\t\t          <div class="card">\n\t\t            <div class="card-image">\n\t\t              <span class="card-title">{{items.code}}</span>\n\t\t            </div>\n\t\t            <div class="card-content">\n\t\t              <span>{{items.post_likes}}</span> people \n\t\t            </div>\n\t\t            <div class="card-action">\n\t\t              <a href="#">This is a link</a>\n\t\t            </div>\n\t\t          </div>\n\t          </div>\n          </div>\n        </div>\n          '
+	template: '\n\t\t<div class="row">\n\t\t\t<div class="col l3 m6 s12 placement-class" v-for="items in masterArray">\n\t\t\t\t<div class="col s12 m7">\n\t\t          <div class="card">\n\t\t            <div class="card-image">\n\t\t              <span class="card-title">{{items.code}}</span>\n\t\t            </div>\n\t\t            <div class="card-content">\n\t\t              <span>{{items.post_id}}</span>\n\t\t            </div>\n\t\t            <div class="card-action">\n\t\t              <a href="#">This is a link</a>\n\t\t            </div>\n\t\t          </div>\n\t          </div>\n          </div>\n        </div>\n          '
 });
 
 /***/ }),
@@ -55,8 +55,9 @@ var getData = {
 			}).then(function (response) {
 				var _tempArray;
 
+				console.log("pushing data");
 				(_tempArray = _this.tempArray).push.apply(_tempArray, _toConsumableArray(response.data));
-				_this.infiniteScroll(_this.infiniteScrollPerPage);
+				_this.infiniteScroll();
 			}).catch(function (error) {
 				console.log(error);
 			});
@@ -91,29 +92,31 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var infiniteScroll = {
 	methods: { //_.throttle is from lodash and it throttles the eventlisteners from firing on every scroll event
-		infiniteScroll: _lodash2.default.throttle(function (perPage) {
+		infiniteScroll: _lodash2.default.throttle(function () {
 			//determines how far away you are from the top of the screen. It is written this way becuase none work in every browser.
 			var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
-			console.log('windows height: ' + window.innerHeight);
-			console.log('Body top: ' + scrollTop);
-			console.log('offset height: ' + document.body.offsetHeight);
-
-			if (window.innerHeight + scrollTop > document.body.offsetHeight - 200 || this.infiniteScrollCurrentOffset == 0) {
+			//if the screen is 200px from the edge or if the page jsut started (thus offset is 0), do the code
+			if (window.innerHeight + scrollTop > document.body.offsetHeight - 200) {
 				var i = 0;
 				var entry = void 0;
+				console.log("it goes in here");
 				do {
-					i++;
 					entry = this.infiniteScrollPage * this.infiniteScrollPerPage + i;
+					i++;
+					//console.log(entry)
 					this.masterArray.push(this.tempArray[entry]);
 				} while (i < this.infiniteScrollPerPage);
 
-				if (this.infiniteScrollPage * this.infiniteScrollPerPage % this.infiniteScrollOffset == 0) {
+				if ((this.infiniteScrollPage + 1) * this.infiniteScrollPerPage % this.infiniteScrollOffset == 0) {
+
+					console.log("It is now there");
 					// increase the currentoffset and reset the page and temporaryArray
 					this.infiniteScrollCurrentOffset += this.infiniteScrollOffset;
 					this.infiniteScrollPage = 0;
 					this.tempArray = [];
-					this.getData(this.offset);
+					this.getData(this.infiniteScrollCurrentOffset);
 				} else {
+					console.log("page has been turned");
 					this.infiniteScrollPage++;
 				}
 			}
