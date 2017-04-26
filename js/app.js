@@ -44,18 +44,23 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
 var getData = {
 	methods: {
-		getData: function getData(offset) {
+		getData: function getData(offset, type, code, orderBy) {
 			var _this = this;
 
 			_axios2.default.get('http://api.piratetimes.net/api/v1/social/?_format=json', {
 				params: {
+					type: type,
 					sub_type: 'I',
+					code: code,
+					order_by: orderBy,
 					offset: offset
+
 				}
 			}).then(function (response) {
 				var _tempArray;
 
 				console.log("pushing data");
+				console.log(type);
 				(_tempArray = _this.tempArray).push.apply(_tempArray, _toConsumableArray(response.data));
 				_this.infiniteScroll();
 			}).catch(function (error) {
@@ -122,7 +127,7 @@ var infiniteScroll = {
 					this.infiniteScrollCurrentOffset += this.infiniteScrollOffset;
 					this.infiniteScrollPage = 0;
 					this.tempArray = [];
-					this.getData(this.infiniteScrollCurrentOffset);
+					this.getData(this.infiniteScrollCurrentOffset, this.filters.type, this.filters.code, this.filters.orderBy);
 				} else {
 					console.log("page has been turned");
 					this.infiniteScrollPage++;
@@ -172,7 +177,8 @@ var vue1 = new _vue2.default({
         infiniteScrollPage: 0,
         infiniteScrollPerPage: 20, //how many items are loaded per page
         masterArray: [], //holds all the entires that are visible.
-        tempArray: [] //holds all the entries of a single GET.
+        tempArray: [], //holds all the entries of a single GET.
+        filters: { type: "tw", code: "PPAT", orderBy: "" }
     },
     methods: {
         scrolling: function scrolling() {
@@ -181,12 +187,17 @@ var vue1 = new _vue2.default({
             window.addEventListener('scroll', function () {
                 _this.infiniteScroll(_this.infiniteScrollPerPage);
             });
+        },
+        filtering: function filtering(type, code, orderBy) {
+            this.filters.type = type;
+            this.filters.code = code;
+            this.filters.orderBy = orderBy;
         }
 
     },
     mixins: [_getData.getData, _infiniteScroll.infiniteScroll],
     mounted: function mounted() {
-        this.getData(this.infiniteScrollCurrent);
+        this.getData(this.infiniteScrollCurrent, this.filters.type, this.filters.code, this.filters.orderBy);
         this.scrolling();
     },
 

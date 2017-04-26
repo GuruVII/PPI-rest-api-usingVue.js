@@ -32,7 +32,7 @@ const infiniteScroll = {
 					this.infiniteScrollCurrentOffset += this.infiniteScrollOffset;
 					this.infiniteScrollPage = 0;
 					this.tempArray = [];
-					this.getData(this.infiniteScrollCurrentOffset);
+					this.getData(this.infiniteScrollCurrentOffset, this.filters.type, this.filters.code, this.filters.orderBy);
 				}
 				else {
 					console.log("page has been turned")
