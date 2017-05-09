@@ -27,6 +27,8 @@ import {infiniteScroll} from "./mixins/infiniteScroll";
                 this.filters.orderBy = orderBy;
             }
             
+            
+            
 
         },
         mixins: [getData, infiniteScroll],

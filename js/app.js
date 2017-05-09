@@ -7,7 +7,7 @@ webpackJsonp([0],{
 
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+    value: true
 });
 
 var _vue = __webpack_require__(1);
@@ -17,9 +17,22 @@ var _vue2 = _interopRequireDefault(_vue);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = _vue2.default.component('pictureList', {
-	props: ['masterArray'], //the data for the prop is acquired though the DOM
-	template: '\n\t\t<div class="row">\n\t\t\t<div class="col l3 m6 s12 placement-class" v-for="items in masterArray">\n\t\t\t\t<div class="col s12 m7">\n\t\t          <div class="card">\n\t\t            <div class="card-image">\n\t\t              <span class="card-title">{{items.code}}</span>\n\t\t            </div>\n\t\t            <div class="card-content">\n\t\t              <span>{{items.post_id}}</span>\n\t\t            </div>\n\t\t            <div class="card-action">\n\t\t              <a href="#">This is a link</a>\n\t\t            </div>\n\t\t          </div>\n\t          </div>\n          </div>\n        </div>\n          '
+    props: ['masterArray'], //the data for the prop is acquired though the DOM
+    template: '\n        <div class="row">\n            <div class="col l3 m6 s12 placement-class" v-for="items in masterArray">\n                <div class="card">\n                    <a class="card-text" target="_blank" href="#">\n                    <div class="card-image card-image-img" :style="{backgroundImage: socialMediaImage(items.code, items.type, items.post_image)}">\n                        <span class="card-title-bottom  card-belt">\n                            <p class="card-belt-font display-inline ">{{items.code}}</p>                                    \n                            <img class="card-picture-belt-position" :src="socialMediaLogo(items.type)"  style="width:29px;height:29px;">\n                        </span>\n                    </div>\n                    </a>\n                    <div class="card-content right-align card-content-additions">\n                        <p class="card-text">\n                            <span class="emphasis">{{items.post_likes}}</span> people \n                            <span class="tooltip card-post-tooltip-position"><i class="material-icons really-tiny tooltip">info_outline</i>\n                            <span class="tooltiptext">Social engagement score</span></span>\n                        </p>\n                    </div>\n                </div>                        \n            </div>\n        </div>\n          ',
+    methods: {
+        socialMediaLogo: function socialMediaLogo(sm) {
+            //dynamic url rendering doesn't work correctly
+            var images = 'img/' + sm + '.png';
+            return images;
+        },
+        socialMediaImage: function socialMediaImage(code, type, url) {
+            var images = 'url(http://api.piratetimes.net/img/uploads/' + code + '/' + type + '/' + url + ')';
+            return images;
+        }
+    }
+
 });
+/*:style="{'background-image':'url(http://api.piratetimes.net/img/uploads/{{items.code}}/{{items.type}}/{{items.post_image}})'}" */
 
 /***/ }),
 
@@ -178,7 +191,7 @@ var vue1 = new _vue2.default({
         infiniteScrollPerPage: 20, //how many items are loaded per page
         masterArray: [], //holds all the entires that are visible.
         tempArray: [], //holds all the entries of a single GET.
-        filters: { type: "tw", code: "PPAT", orderBy: "" }
+        filters: { type: "", code: "", orderBy: "" }
     },
     methods: {
         scrolling: function scrolling() {
