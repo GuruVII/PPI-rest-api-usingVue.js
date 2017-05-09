@@ -19,4 +19,4 @@ npm run build
 ```
 
 ## Demo
-(LINK)[http://guru.mobiusit.net/PPI-API/] to the demo
+[LINK](http://guru.mobiusit.net/PPI-API/) to the demo
