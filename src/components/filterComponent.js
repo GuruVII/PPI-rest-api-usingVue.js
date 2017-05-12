@@ -1,10 +1,10 @@
 import Vue from "vue";
 export default Vue.component('filterComponent', {
-	props: ['masterArray'], //the data for the prop is acquired though the DOM
+	props: ['currentFilters"'], //the data for the prop is acquired though the DOM
 	template: `
         <div class="row">
             <div class="col s12">
-                <a class="waves-effect waves-light btn filter-button z-depth-0">Reset filters</a> 
+                <a class="waves-effect waves-light btn filter-button z-depth-0" @click="filtering('','','')">Reset filters</a> 
                 <!-- Platform selection dropdown -->
                 <a class="waves-effect waves-light dropdown-button btn filter-button z-depth-0 sort-white platform-button asc" data-activates="platform-selection" data-beloworigin="true">TEST</a>
                     <ul id="platform-selection" class="dropdown-content arrow-color z-depth-0 filter-menu dropdown-platform">
@@ -30,19 +30,20 @@ export default Vue.component('filterComponent', {
                             <span class="party-dropdown-font valign"></span>
                         </li>
                     </ul>
-                <a class="waves-effect waves-light btn filter-button z-depth-0  sort-white" id="asc-desc-views">Engagement</a>
+                <a class="waves-effect waves-light btn filter-button z-depth-0  sort-white" id="asc-desc-views" @click="filtering(undefined, undefined,'likes')">Engagement</a>
              </div>
         </div>
           `,
-    methods: {
-        socialMediaLogo: function(sm){ //dynamic url rendering doesn't work correctly
-            var images ='img/' + sm + '.png'
-            return images
-        },
-        socialMediaImage: function(code, type, url){
-            var images = `url(http://api.piratetimes.net/img/uploads/${code}/${type}/${url})`
-            return images
-
+    methods: { //a single functiom that can be used for all filters and doesn't overwrite previous choices
+        filtering: function(code = this.currentFilters.code, type = this.currentFilters.type, orderBy = this.currentFilters.orderBy){ 
+            let filter = {code, type, orderBy}
+            console.log(filter)
+            this.$emit('filtering', filter)
+        }
+    },
+    data () {
+        return{
+            filter: {}
         }
     }
 

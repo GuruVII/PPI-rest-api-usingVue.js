@@ -12,8 +12,8 @@
 		<div class="container">
 			<div class="section valign-wrapper">
             	<div class="singlePage">
-            		<filter-component></filter-component>
-					<picture-list :master-array="masterArray" v-on:scroll="infiniteScroll"></picture-list>
+            		<filter-component :current-filters="filters" @filtering="filtering(filter)"></filter-component>
+					<picture-list :master-array="masterArray" :scroll="infiniteScroll"></picture-list>
 				</div>
 			</div>
 		</div>

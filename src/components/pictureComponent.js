@@ -37,4 +37,3 @@ export default Vue.component('pictureList', {
     }
 
 	})
-/*:style="{'background-image':'url(http://api.piratetimes.net/img/uploads/{{items.code}}/{{items.type}}/{{items.post_image}})'}" */

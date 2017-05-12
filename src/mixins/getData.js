@@ -15,7 +15,6 @@ const getData = {
 				})
 				.then(response => {
 					console.log("pushing data");
-					console.log(type)
 					this.tempArray.push(...response.data)
 					this.infiniteScroll();
 				})

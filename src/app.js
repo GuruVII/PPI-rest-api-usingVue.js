@@ -24,10 +24,12 @@ import {infiniteScroll} from "./mixins/infiniteScroll";
             scrolling: function(){
                 window.addEventListener('scroll', () => {this.infiniteScroll(this.infiniteScrollPerPage)});
             },
-            filtering: function(type, code, orderBy){
-                this.filters.type = type;
-                this.filters.code = code;
-                this.filters.orderBy = orderBy;
+            filtering: function(filter){
+                this.masterArray = [];
+                this.tempArray = [];
+                this.infiniteScrollCurrentOffse = 0;
+                this.infiniteScrollPage = 0;
+                this.getData(this.infiniteScrollCurrentOffset, this.filters.type, this.filters.code, this.filters.orderBy)
             }
             
             
@@ -36,7 +38,7 @@ import {infiniteScroll} from "./mixins/infiniteScroll";
         },
         mixins: [getData, infiniteScroll],
         mounted() {
-            this.getData(this.infiniteScrollCurrent, this.filters.type, this.filters.code, this.filters.orderBy);
+            this.getData(this.infiniteScrollCurrentOffset, this.filters.type, this.filters.code, this.filters.orderBy);
             this.scrolling();
         },
         components: {
