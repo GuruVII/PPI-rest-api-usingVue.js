@@ -17,6 +17,12 @@ npm install
 npm run build
 
 ```
+## Things that still need to be added
+* page that shows posts instead of pictures
+* options to filter/narrow displayed items
+* loading page when scrolling surpasses the ability to acquire data though the API
+* error page
+
 
 ## Demo
 [LINK](http://guru.mobiusit.net/PPI-API/) to the demo

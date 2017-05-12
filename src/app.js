@@ -1,8 +1,11 @@
 import Vue from "vue";
+import Jquery from "jquery"
+import Materialize from "materialize-css"
 import _ from 'lodash';
 import throttle from 'lodash.throttle';
 import {getData} from "./mixins/getData";
 import pictureList from "./components/pictureComponent";
+import filterComponent from "./components/filterComponent";
 import {infiniteScroll} from "./mixins/infiniteScroll";
 
 
@@ -37,6 +40,7 @@ import {infiniteScroll} from "./mixins/infiniteScroll";
             this.scrolling();
         },
         components: {
-            pictureList
+            pictureList,
+            filterComponent
         }
     })
