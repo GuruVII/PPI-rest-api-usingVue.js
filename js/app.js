@@ -27386,7 +27386,7 @@ var _vue2 = _interopRequireDefault(_vue);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = _vue2.default.component('filterComponent', {
-    props: ['currentFilters"'], //the data for the prop is acquired though the DOM
+    props: ['currentFilters'], //the data for the prop is acquired though the DOM
     template: '\n        <div class="row">\n            <div class="col s12">\n                <a class="waves-effect waves-light btn filter-button z-depth-0" @click="filtering(\'\',\'\',\'\')">Reset filters</a> \n                <!-- Platform selection dropdown -->\n                <a class="waves-effect waves-light dropdown-button btn filter-button z-depth-0 sort-white platform-button asc" data-activates="platform-selection" data-beloworigin="true">TEST</a>\n                    <ul id="platform-selection" class="dropdown-content arrow-color z-depth-0 filter-menu dropdown-platform">\n                        <li class="filter-menu-items dropdown-menu-social-filter"><input id="all-platforms" class="with-gap platform-button" name="platform" type="radio" value="all" ng-model="radioBtn" ng-click="filterPlatform(radioBtn)">\n                            <label for="all-platforms" class="platform-dropdown-font  radioButtonLabel">All</label>\n                        </li>\n                        <li class="filter-menu-items dropdown-menu-social-filter"><input class="with-gap" name="platform" type="radio" id="FB-platform" value="fb" ng-model=\'radioBtn\' ng-click="filterPlatform(radioBtn)">\n                            <label for="FB-platform" class="platform-dropdown-font  radioButtonLabel">Facebook</label>\n                        </li>\n                        <li class="filter-menu-items dropdown-menu-social-filter"><input class="with-gap" name="platform" type="radio" id="TW-platform" value="tw" ng-model=\'radioBtn\' ng-click="filterPlatform(radioBtn)">\n                            <label for="TW-platform" class="platform-dropdown-font  radioButtonLabel">Twitter</label></li>\n                       <!-- <li class="filter-menu-items dropdown-menu-social-filter"><input class="with-gap" name="platform" type="radio" id="G+-platform" value="G+ "ng-model="radioBtn" ng-click="filterPlatform(radioBtn)">\n                            <label for="G+-platform" class="dropdown-font-text radioButtonLabel">Google+</label></li> -->\n                    </ul>\n                    <!-- Party selection dropdown -->\n                    <a class="waves-effect waves-light dropdown-button btn filter-button z-depth-0 sort-white asc" data-activates="party-selection" data-beloworigin="true" id="party-selection-button"> Party <span class="hide-bellow-1250">selection</span></a>\n                    <ul id="party-selection" class="dropdown-content arrow-color z-depth-0 filter-menu dropdown-menu-parties">\n                        <!--both dropdown-text-input-li and dropdown-text-input are using !important" -->\n                        <li class="dropdown-text-input-li">\n                            <input placeholder="SEARCH" class="dropdown-text-input" name="party" type="text"  id="party-selection-search" autofocus>\n                        </li>             \n                        <li class="filter-menu-items party-dropdown waves-effect valign">\n                            <span class="party-dropdown-font valign"></span>\n                        </li>\n                    </ul>\n                <a class="waves-effect waves-light btn filter-button z-depth-0  sort-white" id="asc-desc-views" @click="filtering(undefined, undefined,\'likes\')">Engagement</a>\n             </div>\n        </div>\n          ',
     methods: { //a single functiom that can be used for all filters and doesn't overwrite previous choices
         filtering: function filtering() {
@@ -27398,11 +27398,6 @@ exports.default = _vue2.default.component('filterComponent', {
             console.log(filter);
             this.$emit('filtering', filter);
         }
-    },
-    data: function data() {
-        return {
-            filter: {}
-        };
     }
 });
 
@@ -37920,6 +37915,9 @@ var vue1 = new _vue2.default({
             this.tempArray = [];
             this.infiniteScrollCurrentOffse = 0;
             this.infiniteScrollPage = 0;
+            this.filters.type = filter.type;
+            this.filters.code = filter.code;
+            this.filters.orderBy = filter.orderBy;
             this.getData(this.infiniteScrollCurrentOffset, this.filters.type, this.filters.code, this.filters.orderBy);
         }
 

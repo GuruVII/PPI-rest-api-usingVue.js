@@ -29,7 +29,11 @@ import {infiniteScroll} from "./mixins/infiniteScroll";
                 this.tempArray = [];
                 this.infiniteScrollCurrentOffse = 0;
                 this.infiniteScrollPage = 0;
-                this.getData(this.infiniteScrollCurrentOffset, this.filters.type, this.filters.code, this.filters.orderBy)
+                this.filters.type = filter.type;
+                this.filters.code = filter.code;
+                this.filters.orderBy = filter.orderBy;
+                this.getData(this.infiniteScrollCurrentOffset, this.filters.type, this.filters.code, this.filters.orderBy);
+
             }
             
             

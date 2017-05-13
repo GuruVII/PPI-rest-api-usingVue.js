@@ -1,6 +1,6 @@
 import Vue from "vue";
 export default Vue.component('filterComponent', {
-	props: ['currentFilters"'], //the data for the prop is acquired though the DOM
+	props: ['currentFilters'], //the data for the prop is acquired though the DOM
 	template: `
         <div class="row">
             <div class="col s12">
@@ -40,11 +40,5 @@ export default Vue.component('filterComponent', {
             console.log(filter)
             this.$emit('filtering', filter)
         }
-    },
-    data () {
-        return{
-            filter: {}
-        }
     }
-
-	})
+})
